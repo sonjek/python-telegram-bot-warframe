@@ -1,0 +1,9 @@
+*.pyc
+__pycache__
+*.pickle
+config.json
+db.json
+.idea
+venv
+logs
+*.log
