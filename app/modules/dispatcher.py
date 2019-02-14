@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 
-from telegram.ext import CommandHandler, CallbackQueryHandler
+from telegram.ext import CommandHandler, InlineQueryHandler, CallbackQueryHandler
 
 from . import commands, menus, buttons
 
@@ -17,3 +17,4 @@ def init(updater):
 
     dispatcher.add_handler(CallbackQueryHandler(menus.main_menu, pattern='^menu$'))
     dispatcher.add_handler(CallbackQueryHandler(buttons.button, pass_job_queue=True, pass_update_queue=True))
+    dispatcher.add_handler(InlineQueryHandler(inlinequery.warframe_inline_query, pattern='^wf$'))
