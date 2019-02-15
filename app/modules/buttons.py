@@ -16,6 +16,14 @@ def button(update, context):
     elif query.data == 'rareInvasions':
         msg = wf.get_invasions(used_id, False, False)
         query.edit_message_text(text=msg, parse_mode=ParseMode.MARKDOWN)
+    elif query.data == 'alertsList':
+        query.edit_message_text(text=wf.get_alerts(), parse_mode=ParseMode.MARKDOWN)
+    elif query.data == 'itemsList':
+        msg = wf.get_void_trader_items(used_id, False)
+        query.edit_message_text(text=msg, parse_mode=ParseMode.MARKDOWN)
+    elif query.data == 'timePeriod':
+        msg = wf.get_void_trader_info(used_id)
+        query.edit_message_text(text=msg, parse_mode=ParseMode.MARKDOWN)
 
     else:
         query.edit_message_text(text=f'Selected option: {query.data}')

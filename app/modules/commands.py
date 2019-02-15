@@ -32,3 +32,20 @@ def invasions(update, context):
     utils.update_user_data(update.message.from_user, context.user_data)
     text = wf.get_invasions(update.message.from_user.id, True, False)
     update.message.reply_text(text=text, parse_mode=ParseMode.MARKDOWN)
+
+
+def alerts(update, context):
+    utils.update_user_data(update.message.from_user, context.user_data)
+    update.message.reply_text(text=wf.get_alerts(), parse_mode=ParseMode.MARKDOWN)
+
+
+def void_trader(update, context):
+    if update.message is not None:
+        from_user = update.message.from_user
+    else:
+        from_user = update.callback_query.from_user
+
+    utils.update_user_data(update.message.from_user, context.user_data)
+    text = wf.get_void_trader_items(from_user.id)
+    update.message.reply_text(text=text, parse_mode=ParseMode.MARKDOWN)
+

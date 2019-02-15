@@ -2,6 +2,8 @@
     "bot_token": "TOKEN",
     "api_endpoint": "https://api.warframestat.us/pc/",
     "api_invasions": "invasions",
+    "api_void_trader": "voidTrader",
+    "api_alerts": "alerts",
     "date_time_format": "%Y-%m-%d %H:%M:%S %p",
     "log_to_file": true,
     "log_format": "%(asctime)s %(levelname)s - %(name)s - %(message)s",

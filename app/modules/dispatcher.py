@@ -14,6 +14,8 @@ def init(updater):
 
     dispatcher.add_handler(CommandHandler('start', commands.start))
     dispatcher.add_handler(CommandHandler('invasions', commands.invasions))
+    dispatcher.add_handler(CommandHandler('alerts', commands.alerts))
+    dispatcher.add_handler(CommandHandler('voidtrader', commands.void_trader))
 
     dispatcher.add_handler(CallbackQueryHandler(menus.main_menu, pattern='^menu$'))
     dispatcher.add_handler(CallbackQueryHandler(buttons.button, pass_job_queue=True, pass_update_queue=True))
