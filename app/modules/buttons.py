@@ -4,7 +4,7 @@
 
 from telegram import ParseMode
 
-from ..sources import wf
+from ..sources import wf, twitch
 
 
 def button(update, context):
@@ -24,6 +24,10 @@ def button(update, context):
     elif query.data == 'timePeriod':
         msg = wf.get_void_trader_info(used_id)
         query.edit_message_text(text=msg, parse_mode=ParseMode.MARKDOWN)
+    elif query.data == 'twitchStatus':
+        text, info = twitch.get_twitch_status(used_id)
+        query.edit_message_text(text=text, parse_mode=ParseMode.MARKDOWN)
+
 
     else:
         query.edit_message_text(text=f'Selected option: {query.data}')

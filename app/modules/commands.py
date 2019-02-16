@@ -7,12 +7,13 @@ import traceback
 from telegram import ParseMode
 
 from . import keyboards
-from ..sources import wf
+from ..sources import wf, twitch
 from ..utils import utils
 from ..utils.logging import logger
 from ..utils.loadconfig import config
 
 warframe = wf.Warframe()
+tw = twitch.Twitch()
 
 
 def error(update, context):
@@ -49,3 +50,8 @@ def void_trader(update, context):
     text = wf.get_void_trader_items(from_user.id)
     update.message.reply_text(text=text, parse_mode=ParseMode.MARKDOWN)
 
+
+def twitch_get_channel_status(update, context):
+    utils.update_user_data(update.message.from_user, context.user_data)
+    text, info = tw.get_twitch_status(update.message.from_user.id)
+    update.message.reply_text(text=text, parse_mode=ParseMode.MARKDOWN)

@@ -11,6 +11,7 @@ def main_menu_keyboard():
          InlineKeyboardButton('Rare Invasions', callback_data='rareInvasions')],
         [InlineKeyboardButton('All Active Alerts', callback_data='alertsList')],
         [InlineKeyboardButton('Void Trader Items', callback_data='itemsList'),
-         InlineKeyboardButton('Void Trader Period', callback_data='timePeriod')]
+         InlineKeyboardButton('Void Trader Period', callback_data='timePeriod')],
+        [InlineKeyboardButton('Twitch Channel Status', callback_data='twitchStatus')]
     ]
     return InlineKeyboardMarkup(keyboard)
