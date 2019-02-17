@@ -32,6 +32,42 @@ def put_user_data(user_id, user_data):
         users.insert(user_data)
 
 
+def is_invasion_notified(invasion_id, user_id):
+    Invasion = Query()
+
+    invasions = db.table('invasions')
+    if invasions.contains((Invasion.id == invasion_id) & (Invasion.started == True) & (Invasion.users.any([user_id]))):
+        logger.debug(f'@@@@ [{user_id}] isInvasionNotified TRUE for {invasion_id}')
+        return True
+    else:
+        logger.debug(f'@@@@ [{user_id}] isInvasionNotified FALSE for {invasion_id}')
+        return False
+
+
+def put_invasion(invasion_id, user_id, reward_a, reward_d, created, started):
+    Invasion = Query()
+
+    invasions = db.table('invasions')
+    if not invasions.contains(Invasion.id == invasion_id):
+        invasion = {'id': invasion_id, 'created': created, 'started': started,
+                    'reward_a': reward_a, 'reward_d': reward_d, 'users': [user_id]}
+        logger.debug(f'@@@@ [{user_id}] insert invasion {invasion_id} -> {invasion}')
+        invasions.insert(invasion)
+    else:
+        invasion_list = invasions.search(Invasion.id == invasion_id)
+        if invasion_list:
+            invasion = invasion_list[0]
+            logger.debug(f'@@@@ [{user_id}] inv {invasion_id} --->>> {invasion}')
+            users = invasion['users']
+            if user_id not in users:
+                users.append(user_id)
+                invasions.update({'users': users}, Invasion.id == invasion_id)
+                logger.debug(f'@@@@ [{user_id}] inv {invasion_id} update users {users}')
+            if not invasion['started'] and started:
+                invasions.update({'started': started}, Invasion.id == invasion_id)
+                logger.debug(f'@@@@ [{user_id}] inv {invasion_id} update started {started}')
+
+
 def is_alert_notified(alert_id, user_id):
     Alert = Query()
 
@@ -75,42 +111,6 @@ def put_alert(alert_id, user_id, reward, created):
                 logger.debug(f'@@@@ [{user_id}] alert {alert_id} update users {users}')
 
 
-def is_invasion_notified(invasion_id, user_id):
-    Invasion = Query()
-
-    invasions = db.table('invasions')
-    if invasions.contains((Invasion.id == invasion_id) & (Invasion.started == True) & (Invasion.users.any([user_id]))):
-        logger.debug(f'@@@@ [{user_id}] isInvasionNotified TRUE for {invasion_id}')
-        return True
-    else:
-        logger.debug(f'@@@@ [{user_id}] isInvasionNotified FALSE for {invasion_id}')
-        return False
-
-
-def put_invasion(invasion_id, user_id, reward_a, reward_d, created, started):
-    Invasion = Query()
-
-    invasions = db.table('invasions')
-    if not invasions.contains(Invasion.id == invasion_id):
-        invasion = {'id': invasion_id, 'created': created, 'started': started,
-                    'reward_a': reward_a, 'reward_d': reward_d, 'users': [user_id]}
-        logger.debug(f'@@@@ [{user_id}] insert invasion {invasion_id} -> {invasion}')
-        invasions.insert(invasion)
-    else:
-        invasion_list = invasions.search(Invasion.id == invasion_id)
-        if invasion_list:
-            invasion = invasion_list[0]
-            logger.debug(f'@@@@ [{user_id}] inv {invasion_id} --->>> {invasion}')
-            users = invasion['users']
-            if user_id not in users:
-                users.append(user_id)
-                invasions.update({'users': users}, Invasion.id == invasion_id)
-                logger.debug(f'@@@@ [{user_id}] inv {invasion_id} update users {users}')
-            if not invasion['started'] and started:
-                invasions.update({'started': started}, Invasion.id == invasion_id)
-                logger.debug(f'@@@@ [{user_id}] inv {invasion_id} update started {started}')
-
-
 def is_void_trader_item_notified(item_id, user_id):
     """
     # & (Voidtrader.inventory.any(Inventory.num == item))
@@ -150,3 +150,36 @@ def put_void_trader_item(item_id, user_id, inventory):
         if is_need_update:
             void_trader_items.update(void_trader_item, Voidtrader.id == item_id)
             logger.debug(f'@@@@ [{user_id}] update VoidTrader Item {item_id} -> {void_trader_item}')
+
+
+def is_twitch_status_notified(stream_id, user_id):
+    Twitch = Query()
+
+    twitch_streams = db.table('twitch_streams')
+    twitch_streams_list = twitch_streams.search((Twitch.id == stream_id) & (Twitch.users.any([user_id])))
+    if twitch_streams_list:
+        logger.debug(f'@@@@ [{user_id}] is_twitch_status_notified TRUE for {stream_id}')
+        return True
+    else:
+        logger.debug(f'@@@@ [{user_id}] is_twitch_status_notified FALSE for {stream_id}')
+        return False
+
+
+def put_twitch_status(stream_id, created, title, user_id):
+    Twitch = Query()
+
+    twitch_streams = db.table('twitch_streams')
+    if not twitch_streams.contains(Twitch.id == stream_id):
+        twitch_stream = {'id': stream_id, 'created': created, 'title': title, 'users': [user_id]}
+        logger.debug(f'@@@@ [{user_id}] insert twitch status {stream_id} -> {twitch_stream}')
+        twitch_streams.insert(twitch_stream)
+    else:
+        twitch_stream_list = twitch_streams.search(Twitch.id == stream_id)
+        if twitch_stream_list:
+            twitch_stream = twitch_stream_list[0]
+            logger.debug(f'@@@@ [{stream_id}] twitch status {stream_id} --->>> {twitch_stream}')
+            users = twitch_stream['users']
+            if user_id not in users:
+                users.append(user_id)
+                twitch_streams.update({'users': users}, Twitch.id == stream_id)
+                logger.info(f'@@@@ [{user_id}] twitch status {stream_id} update users {users}')

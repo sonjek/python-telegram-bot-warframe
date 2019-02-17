@@ -14,3 +14,12 @@ def main_menu(update, context):
                                   message_id=query.message.message_id,
                                   text='Please choose action:',
                                   reply_markup=keyboards.main_menu_keyboard())
+
+
+def admin_menu(update, context):
+    logger.info(f'@@@@ user_data {context.user_data}')
+
+    job_names = [job.name for job in context.job_queue.jobs()]
+    context.bot.send_message(chat_id=update.message.chat_id,
+                             text='Please choose action:',
+                             reply_markup=keyboards.admin_menu_keyboard(job_names))

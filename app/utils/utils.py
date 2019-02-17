@@ -38,3 +38,11 @@ def update_user_data(user_info, user_data):
 
     if user_data != db_user_data:
         user_data.update(db_user_data)
+
+
+def prepare_switch_button(job_names, job_name):
+    job_code = config[job_name]
+    state = job_code in job_names
+    title = '✓ ' if state else '✗ '
+    code = ('remove_' if state else 'schedule_') + job_code
+    return title, code

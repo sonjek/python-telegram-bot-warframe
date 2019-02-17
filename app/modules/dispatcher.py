@@ -2,9 +2,11 @@
 # -*- coding: utf-8 -*-
 #
 
-from telegram.ext import CommandHandler, InlineQueryHandler, CallbackQueryHandler
+from telegram.ext import CommandHandler, InlineQueryHandler, Filters, CallbackQueryHandler
+from datetime import timedelta
 
-from . import commands, menus, buttons
+from . import commands, menus, buttons, inlinequery
+from ..utils.loadconfig import config
 
 
 def init(updater):
@@ -12,6 +14,7 @@ def init(updater):
 
     dispatcher.add_error_handler(commands.error)
 
+    dispatcher.add_handler(CommandHandler('admin', commands.admin, filters=Filters.user(username=config['admin_name'])))
     dispatcher.add_handler(CommandHandler('start', commands.start))
     dispatcher.add_handler(CommandHandler('invasions', commands.invasions))
     dispatcher.add_handler(CommandHandler('alerts', commands.alerts))
