@@ -5,12 +5,15 @@
 from telegram.ext import CommandHandler, InlineQueryHandler, Filters, CallbackQueryHandler
 from datetime import timedelta
 
+from ..utils import jobpickle
 from . import commands, menus, buttons, inlinequery
 from ..utils.loadconfig import config
 
 
 def init(updater):
     dispatcher = updater.dispatcher
+
+    updater.job_queue.run_repeating(jobpickle.save_jobs_job, timedelta(minutes=config['backup_job_minutes_interval']))
 
     dispatcher.add_error_handler(commands.error)
 

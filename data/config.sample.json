@@ -15,6 +15,8 @@
     "log_folder": "logs",
     "log_file": "myapp.log",
     "pickle_persistence_db": "persistence.pickle",
+    "job_pickle_db": "jobs.pickle",
+    "job_pickle_name": "save_jobs_job",
     "job_invasion_notification": "invasion_notification_job",
     "job_alert_notification": "alert_notification_job",
     "job_void_trader_notification": "void_trader_notification_job",

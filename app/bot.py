@@ -10,16 +10,24 @@
 from telegram.ext import Updater, PicklePersistence
 from app.modules import dispatcher
 from app.utils.loadconfig import config, get_path
+from app.utils import jobpickle
 
 
 def main():
     pp = PicklePersistence(filename=get_path('pickle_persistence_db'))
     updater = Updater(token=config['bot_token'], persistence=pp, use_context=True)
 
+    try:
+        jobpickle.load_jobs(updater.job_queue)
+    except FileNotFoundError:
+        pass
+
     dispatcher.init(updater)
 
     updater.start_polling(clean=True)
     updater.idle()
+
+    jobpickle.save_jobs(updater.job_queue)
 
 
 if __name__ == '__main__':
