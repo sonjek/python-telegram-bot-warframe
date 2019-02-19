@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+    tbot:
+        container_name: tbot
+        build: .
+        image: tbot
+        environment:
+            TZ: "Europe/Kiev"
+        working_dir: '/app'
+        volumes:
+            - "${PWD}/data:/app/data"
+        command: "python -i -m app.bot"
+        restart: always
