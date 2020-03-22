@@ -57,8 +57,8 @@ Run method 1
 ```bash
 $ python3 -m venv venv
 $ source venv/bin/activate
-$ pip3 install -r app/requirements.txt
-$ venv/bin/python -i -m app.bot
+$ pip3 install -r tbot/requirements.txt
+$ venv/bin/python -i -m tbot.bot
 ```
 
 

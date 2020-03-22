@@ -8,9 +8,9 @@
 #
 
 from telegram.ext import Updater, PicklePersistence
-from app.modules import dispatcher
-from app.utils.loadconfig import config, get_path
-from app.utils import jobpickle
+from tbot.modules import dispatcher
+from tbot.utils.loadconfig import config, get_path
+from tbot.utils import jobpickle
 
 
 def main():

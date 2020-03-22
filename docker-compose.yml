@@ -6,8 +6,8 @@ services:
         image: tbot
         environment:
             TZ: "Europe/Kiev"
-        working_dir: '/app'
+        working_dir: '/tbot'
         volumes:
-            - "${PWD}/data:/app/data"
-        command: "python -i -m app.bot"
+            - "${PWD}/data:/tbot/data"
+        command: "python -i -m tbot.bot"
         restart: always

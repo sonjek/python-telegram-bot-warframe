@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 from ..utils.Singleton import Singleton
 from ..utils.loadconfig import config
 from ..utils.logging import logger
-from app.utils import db
+from ..utils import db
 
 not_active_msg = 'Translation is not active'
 

@@ -5,6 +5,7 @@
 from pathlib import Path
 import json
 
+
 DATA_DIR = 'data'
 CONFIG_FILE = 'config.json'
 

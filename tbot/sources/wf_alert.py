@@ -4,7 +4,7 @@
 # https://api.warframestat.us/pc/alerts
 
 from datetime import datetime
-from app.utils.logging import logger
+from ..utils.logging import logger
 
 
 class Alert:
