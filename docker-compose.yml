@@ -4,6 +4,7 @@ services:
         container_name: tbot
         build: .
         image: tbot
+        user: "1000:1000"
         environment:
             TZ: "Europe/Kiev"
         working_dir: '/tbot'
