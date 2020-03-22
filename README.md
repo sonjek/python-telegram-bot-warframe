@@ -1,7 +1,7 @@
 warframe_notification_tbot
 ======================
 
-[![Python 3.6](https://img.shields.io/badge/python-3.6-green.svg)](https://www.python.org/downloads/release/python-360/) [![GitHub tag](https://img.shields.io/github/tag/sonjek/warframe_notification_tbot.svg)](https://github.com/sonjek/warframe_notification_tbot/tags/) [![License](https://img.shields.io/badge/License-BSD%203--Clause-green.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/) [![GitHub tag](https://img.shields.io/github/tag/sonjek/warframe_notification_tbot.svg)](https://github.com/sonjek/warframe_notification_tbot/tags/) [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 
 A Telegram bot for event notification with a rare award (Orokin Reactor, Orokin Catalyst, Forma and etc).
