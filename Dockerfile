@@ -12,3 +12,4 @@ COPY tbot /tbot/tbot
 WORKDIR /tbot
 
 ENV PATH="/opt/venv/bin:$PATH"
+USER 1000:1000

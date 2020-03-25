@@ -9,7 +9,7 @@ It can send a notification to a configured Telegram channel or manually through 
 
 *NOTE*: This bot uses https://api.warframestat.us
 
-Example bot: https://t.me/warframe_monit_bot
+You can try: [@warframe_monit_bot](https://t.me/warframe_monit_bot)
 
 
 ## Commands
