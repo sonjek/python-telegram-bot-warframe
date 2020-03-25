@@ -21,9 +21,9 @@ from .wf_alert import Alert
 from .wf_void_trader import Baro
 
 
-no_alerts_msg = 'No active alerts'
-no_invasions_msg = 'No active invasions'
-no_invasions_rare_rewards_msg = 'No active invasions with rare reward'
+msg_no_alerts = 'No active alerts'
+msg_no_invasions = 'No active invasions'
+msg_no_invasions_rare_rewards = 'No active invasions with rare reward'
 
 
 def get_json(key):
@@ -156,14 +156,14 @@ class Warframe(metaclass=Singleton):
 def get_alerts(user_id=None, is_job=False):
     msg = Warframe().get_alerts(user_id, is_job)
     if not msg:
-        msg = no_alerts_msg
+        msg = msg_no_alerts
     return msg
 
 
 def get_invasions(user_id=None, all_active=True, is_job=False):
     msg = Warframe().get_invasions(user_id, all_active, is_job)
     if not msg:
-        msg = no_invasions_msg if all_active else no_invasions_rare_rewards_msg
+        msg = msg_no_invasions if all_active else msg_no_invasions_rare_rewards
     return msg
 
 

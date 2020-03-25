@@ -10,8 +10,7 @@ from ..utils.loadconfig import config
 from ..utils.logging import logger
 from ..utils import db
 
-not_active_msg = 'Translation is not active'
-
+msg_not_active = 'Translation is not active'
 
 class Twitch(metaclass=Singleton):
     def __init__(self):
@@ -59,7 +58,7 @@ class Twitch(metaclass=Singleton):
             text = f"[link]({info['url']}) {info['title']}"
         else:
             info = self.info
-            text = not_active_msg
+            text = msg_not_active
         return info, text
 
     def get_twitch_status(self, user_id, is_job=False):
@@ -67,11 +66,15 @@ class Twitch(metaclass=Singleton):
 
         info, text = self.prepare_data()
 
+        if is_job and any(ext in text for ext in config['exclude_twitch_streams']):
+            logger.debug(f"@@@@ skip excluded twitch_status: {info['title']}")
+            text = ''
+
         msg = ''
-        if text and text != not_active_msg and is_job and user_id:
+        if text and text != msg_not_active and is_job and user_id:
             if db.is_twitch_status_notified(info['id'], user_id):
                 logger.debug(f"@@@@ skip notified twitch_status for {user_id} >> {info['title']}")
-                text = not_active_msg
+                text = msg_not_active
             else:
                 db.put_twitch_status(info['id'], info['created'], info['title'], user_id)
         msg += text

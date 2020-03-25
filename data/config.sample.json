@@ -58,5 +58,8 @@
        "Wraith Twin Vipers Barrel",
        "Wraith Twin Vipers Receiver",
        "Wraith Twin Vipers Link"
+    ],
+    "exclude_twitch_streams": [
+       "Working From Home Community Stream"
     ]
 }

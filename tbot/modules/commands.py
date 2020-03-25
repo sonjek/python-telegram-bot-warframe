@@ -65,14 +65,14 @@ def admin(update, context):
 def job_invasions(update):
     chat_id = update.job.context
     msg = warframe.get_invasions(chat_id, False, True)
-    if msg and msg != wf.no_invasions_msg and msg != wf.no_invasions_rare_rewards_msg:
+    if msg and msg != wf.msg_no_invasions and msg != wf.msg_no_invasions_rare_rewards:
         update.bot.send_message(chat_id=chat_id, text=msg, parse_mode=ParseMode.MARKDOWN)
 
 
 def job_alerts(update):
     chat_id = update.job.context
     msg = warframe.get_alerts(chat_id, True, True)
-    if msg and msg != wf.no_alerts_msg:
+    if msg and msg != wf.msg_no_alerts:
         update.bot.send_message(chat_id=chat_id, text=msg, parse_mode=ParseMode.MARKDOWN)
 
 
@@ -86,5 +86,5 @@ def job_void_trader(update):
 def job_twitch_get_channel_status(update):
     chat_id = update.job.context
     text, info = tw.get_twitch_status(chat_id, True)
-    if text and text != twitch.not_active_msg:
+    if text and text != twitch.msg_not_active:
         update.bot.send_message(chat_id=chat_id, text=text, parse_mode=ParseMode.MARKDOWN)
